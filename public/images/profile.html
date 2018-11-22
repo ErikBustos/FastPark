@@ -1,0 +1,235 @@
+<html>
+    <head>
+        <title>Index</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+       
+        <link rel="stylesheet" href="css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!--Modal-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+
+  
+
+<!--firebase-->
+<script src="https://www.gstatic.com/firebasejs/5.5.2/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.5.2/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.5.2/firebase-database.js"></script>
+  
+        <style>
+            .card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    max-width: 300px;
+    margin: auto;
+    text-align: center;
+}
+
+.title {
+    color: grey;
+    font-size: 18px;
+}
+
+button {
+    border: none;
+    outline: 0;
+    display: inline-block;
+    padding: 8px;
+    color: white;
+    background-color: #000;
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+    font-size: 18px;
+}
+
+a {
+    text-decoration: none;
+    font-size: 22px;
+    color: black;
+}
+
+button:hover, a:hover {
+    opacity: 0.7;
+}
+
+        </style>
+    </head>
+
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="#">FastPark</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+          
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                  <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#"  id="btnLogout">Log out</a>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Dropdown
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Log out</a>
+                  </div>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link disabled" href="#">Disabled</a>
+                </li>
+              </ul>
+              <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+              </form>
+            </div>
+          </nav>
+
+            <div class="card">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/f/f9/Phoenicopterus_ruber_in_S%C3%A3o_Paulo_Zoo.jpg" alt="John" style="width:100%">
+                    <h1 id="nombre">John Doe</h1>
+                    <p class="title" id="edad">edad</p>
+                   
+
+                    <p>ITESO</p>
+                    <a href="#"><i class="fa fa-dribbble"></i></a>
+                    <a href="#"><i class="fa fa-twitter"></i></a>
+                    <a href="#"><i class="fa fa-linkedin"></i></a>
+                    <a href="#"><i class="fa fa-facebook"></i></a>
+                    <p><button>Buscar Estacionamiento</button></p>
+                    <p><button id="btnCarro">Agregar Carro</button></p>
+
+
+                    <div>
+
+                        <button data-toggle="modal" data-target="#myModal">Crear estacionamiento</button>
+                      
+                        <!-- Modal -->
+                        <div class="modal fade" id="myModal" role="dialog">
+                          <div class="modal-dialog">
+                          
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <button type="button" class="close text-right" data-dismiss="modal" >&times;</button>
+                              </div>
+                              <div class="modal-body">
+                                  <h5>Registra tu estacionamiento</h5>
+                                    <input class="form-control" type="text" placeholder="Nombre del Estacionamiento" id="txtNombreEst">
+                                    <input class="form-control" type="text" placeholder="Dirección del estacionamiento" id="txtDireccionest">
+                                    <input class="form-control" type="number" placeholder="Lugares Totales" id="txtLugarest">
+                                    <input class="form-control" type="number" placeholder="Precio por hora" id="txtPrecioest">
+                     
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal" id="btnSubmitEstacionamiento">Agregar estacionamiento</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        
+                      </div>        
+                     </div>      
+
+                        
+
+    </body>
+    
+
+    <script>
+        //user unique id from firebase
+        var config = {
+         apiKey: "AIzaSyAVaten_qJLQb3YyQC_k-CW_rrTX8Bya6I",
+         authDomain: "fastpark-cd1a8.firebaseapp.com",
+         databaseURL: "https://fastpark-cd1a8.firebaseio.com",
+         projectId: "fastpark-cd1a8",
+         storageBucket: "fastpark-cd1a8.appspot.com",
+         messagingSenderId: "86398450595"
+         };
+         firebase.initializeApp(config); 
+         
+         //Btns
+         var btnLogout=document.getElementById('btnLogout');
+         var btnCarro=document.getElementById('btnCarro');
+         var btnSubmitEstacionamiento=document.getElementById('btnSubmitEstacionamiento');
+         
+         btnLogout.addEventListener('click', e=>{
+             firebase.auth().signOut();
+         });
+
+           btnCarro.addEventListener('click', e=>{
+            window.location.href="http://localhost:3000/images/nuevoAuto.html";
+         });
+
+         //txt
+         var txtNombreEst=document.getElementById('txtNombreEst');
+         var txtDireccionest=document.getElementById('txtDireccionest');
+         var txtLugarest=document.getElementById('txtLugarest');
+         var txtPrecioest=document.getElementById('txtPrecioest');
+        
+        //Submit ParkingLot
+         btnSubmitEstacionamiento.addEventListener('click', e=>{
+                var nombreEst=txtNombreEst.value;
+                var direccionEst=txtDireccionest.value;
+                var lugaresEst= txtLugarest.value;
+                var precioEst=txtPrecioest.value;
+               
+                var newEstacionamiento ={
+                Nombre:nombreEst,
+                Direccion:direccionEst,
+                LugaresTotales:lugaresEst,
+                Precio:precioEst   
+        } 
+
+        firebase.database().ref('Estacionamientos').child(nombreEst).set(newEstacionamiento);
+
+         });
+         
+         //realtime listener
+         firebase.auth().onAuthStateChanged(firebaseUser =>{
+             if(firebaseUser){
+              uid=firebaseUser.uid;           
+              firebase.database().ref("Users").once('value').then(function(snapshot){
+                document.getElementById('nombre').innerText= snapshot.child(firebaseUser.uid).child('Nombre').val() +' '+ snapshot.child(firebaseUser.uid).child('Apellido').val();
+                document.getElementById('edad').innerText= snapshot.child(firebaseUser.uid).child('Edad').val();
+                snapshot.child(firebaseUser.uid).child('Nombre').val();
+              });
+            }
+             else{
+    
+                console.log('not logged in');
+               window.location.href="http://localhost:3000";         
+             }
+         });
+      
+       </script>
+<!----script>
+
+       
+        document.getElementById("nombre").innerText="Hello";        
+      // var userId= firebase.auth().currentUser;
+       // console.log(userId);
+        //console.log(snapshot.child('12345').child('Nombre').val());
+        firebase.database().ref("Users").once('value').then(function(snapshot){
+      console.log(snapshot.val());
+      console.log(snapshot.key);
+      console.log('ahi va el bueno');
+      console.log(snapshot.child('12345').child('Nombre').val());
+    
+    });
+    console.log(document.getElementById("nombre"));
+</script-->
+</html>

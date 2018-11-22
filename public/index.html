@@ -1,0 +1,143 @@
+<html>
+    <head>
+        <title>Index</title>
+        <link href="http://fonts.googleapis.com/css?family=Roboto:300,500" rel="stylesheet">
+        <link rel="stylesheet" href="css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <!--firebase-->
+        <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase-auth.js"></script>
+
+        <link rel="stylesheet" href="css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+   </head>
+       
+        
+        <!----<script src="app.js"></script> -->
+       
+      <body>
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                    <a class="navbar-brand" href="#">Navbar</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                      <span class="navbar-toggler-icon"></span>
+                    </button>
+                  
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                      <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="#">Link</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Dropdown
+                          </a>
+                          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                          </div>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link disabled" href="#">Disabled</a>
+                        </li>
+                      </ul>
+                      <form class="form-inline my-2 my-lg-0">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                      </form>
+                    </div>
+                  </nav>
+
+                  <div class="container">
+                        <input id="txtEmail" type="email" class="form-control" aria-describedby="emailHelp" placeholder="Enter email">
+                        
+                        <input id="txtPassword" type="password" placeholder="Password">
+            
+                        <button id="btnLogin" name="btnLogin" class="btn btn-action">
+                          Log in
+                        </button>
+            
+                        <button id="btnSignUp" class="btn btn-secondary">
+                          Sign up
+                        </button>
+            
+                        <button id="btnLogout" class="btn btn-action hide">
+                          Log out
+                        </button>
+            
+                     </div>
+            
+    </body>
+    <script>
+
+     var config = {
+      apiKey: "AIzaSyAVaten_qJLQb3YyQC_k-CW_rrTX8Bya6I",
+      authDomain: "fastpark-cd1a8.firebaseapp.com",
+      databaseURL: "https://fastpark-cd1a8.firebaseio.com",
+      projectId: "fastpark-cd1a8",
+      storageBucket: "fastpark-cd1a8.appspot.com",
+      messagingSenderId: "86398450595"
+      };
+      firebase.initializeApp(config);
+
+  
+      var txtEmail= document.getElementById('txtEmail');
+      var txtPassword= document.getElementById('txtPassword');
+      var btnLogin= document.getElementById('btnLogin');
+      var btnSignUp=document.getElementById('btnSignUp');
+      var btnLogout=document.getElementById('btnLogout');
+      
+  
+      btnLogin.addEventListener('click', e=>{
+        var email=txtEmail.value;
+        var pass=txtPassword.value;
+        var auth=firebase.auth();
+
+        //sign in
+        var promise=auth.signInWithEmailAndPassword(email,pass);
+        
+        promise.catch(e => console.log(e.message));
+
+        redi
+      });
+      
+      btnSignUp.addEventListener('click', e=>{
+          //get email and pass
+          //TODO: Check real email
+        var email=txtEmail.value;
+        var pass=txtPassword.value;
+        var auth=firebase.auth();
+       
+        var promise=auth.createUserWithEmailAndPassword(email,pass);
+        
+        promise.catch(e => console.log(e.message));
+        
+        setTimeout(function() { 
+        window.location.href="http://localhost:3000/images/userdata.html";
+        }, 1000);
+        
+      });
+      
+      btnLogout.addEventListener('click', e=>{
+          firebase.auth().signOut();
+      });
+      //realtime listener
+      firebase.auth().onAuthStateChanged(firebaseUser =>{
+          if(firebaseUser){
+            console.log(firebaseUser);
+            console.log(firebaseUser.uid);
+            btnLogout.classList.remove('hide');
+            window.location.href="http://localhost:3000/images/profile.html";
+          }
+          else{
+              console.log('not logged in');
+              btnLogout.classList.add('hide');
+          }
+      });
+
+
+      
+    </script>
+</html>

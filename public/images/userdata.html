@@ -1,0 +1,182 @@
+<html>
+    <head>
+        <title>Index</title>
+        <link rel="stylesheet" href="css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <!--firebase-->
+        <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase-database.js"></script>
+
+<!------ Include the above in your HEAD tag ---------->
+    </head>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">FastPark</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Link</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Dropdown
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Something else here</a>
+              </div>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link disabled" href="#">Disabled</a>
+            </li>
+          </ul>
+          <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          </form>
+        </div>
+      </nav>
+    <body>
+            <div class="view full-page-intro" style="background-image: url('https://www.google.com.np/imgres?imgurl=https%3A%2F%2Fwww.w3schools.com%2Fw3css%2Fimg_lights.jpg&imgrefurl=https%3A%2F%2Fwww.w3schools.com%2Fw3css%2Fw3css_images.asp&docid=R0KnAtfyBDsyiM&tbnid=kwgHAQqTiLQXLM%3A&vet=10ahUKEwj5z9nr277bAhWBbX0KHZzyAS8QMwitASgBMAE..i&w=600&h=400&bih=702&biw=1366&q=image&ved=0ahUKEwj5z9nr277bAhWBbX0KHZzyAS8QMwitASgBMAE&iact=mrc&uact=8'); background-repeat: no-repeat; background-size: cover;">
+                <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
+                  <div class="container">
+                    <div class="row wow fadeIn">
+                      <div class="col-md-6 mb-4 white-text text-center text-md-left">
+                        <h1 class="display-4 font-weight-bold">Perfil</h1>
+                        <hr class="hr-light">
+                        <p>
+                          <strong>Ingresa tus datos!</strong>
+                        </p>
+                        
+                       
+                      </div>
+                    
+                   
+                      <div class="col-md-6 col-xl-5 mb-4">
+                        <div class="card">
+                          <div class="card-body">
+                            
+                              <div class="md-form">
+                                 <i class="fa fa-user prefix grey-text"></i>
+                                 <input type="text" id="txtNombre" class="form-control" name="nombre">
+                                 <label for="materialFormRegisterNameEx">Nombre</label>
+                              </div>
+                              <div class="md-form">
+                                    <i class="fa fa-user prefix grey-text"></i>
+                                    <input type="text" id="txtApellido" class="form-control" name="apellido">
+                                    <label for="materialFormRegisterNameEx">Apellido</label>
+                                 </div>
+                                 <div class="md-form">
+                                        <i class="fa fa-user prefix grey-text"></i>
+                                        <input type="number" id="numEdad" class="form-control" name="edad">
+                                        <label for="materialFormRegisterNameEx">Edad</label>
+                                     </div>
+                             
+                              <div class="md-form">
+                                    <i class="fa fa-user prefix grey-text"></i>
+                                    <label for="materialFormRegisterNameEx">¿Es propietario de un estacionamiento?</label>
+                                    <select id="dueño">
+                                            <option value="si_dueño">Si</option>
+                                            <option value="no_dueño">No</option>
+                                      </select>
+                                   
+                                 </div>
+                              <div class="text-center mt-4">
+                               <button id="btnSubmit" class="btn btn-primary" type="submit" data-toggle="modal" data-target="#myModal">Register</button>
+                               <div class="modal fade" id="myModal" role="dialog">
+                                 <div class="modal-dialog"> 
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                                <h4 class="modal-title">OOPS!</h4>
+                                          <button type="button" class="close" data-dismiss="modal">×</button>
+                                        </div>
+                                        <div class="modal-body">
+                                          <p>Connection ERROR.........!</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                          
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+</body>
+    <script>
+      
+      var uid; //user unique id from firebase
+      var config = {
+       apiKey: "AIzaSyAVaten_qJLQb3YyQC_k-CW_rrTX8Bya6I",
+       authDomain: "fastpark-cd1a8.firebaseapp.com",
+       databaseURL: "https://fastpark-cd1a8.firebaseio.com",
+       projectId: "fastpark-cd1a8",
+       storageBucket: "fastpark-cd1a8.appspot.com",
+       messagingSenderId: "86398450595"
+       };
+       firebase.initializeApp(config); 
+    
+       var txtNombre= document.getElementById('txtNombre');
+       var txtApellido= document.getElementById('txtApellido');
+       var numEdad= document.getElementById('numEdad');  
+       var btnSubmit= document.getElementById('btnSubmit');
+       var txtdueño= document.getElementById('dueño');
+       
+       //realtime listener
+       firebase.auth().onAuthStateChanged(firebaseUser =>{
+           if(firebaseUser){
+            uid=firebaseUser.uid;
+           console.log(uid);
+          }
+           else{
+             console.log('not logged in');
+             window.location.href="http://localhost:3000";         
+           }
+       });
+
+        btnSubmit.addEventListener('click', e=>{
+
+        var name=txtNombre.value;
+        var apellido=txtApellido.value;
+        var edad= numEdad.value;
+        var dueño;
+        var auth=firebase.auth();
+      
+       if(txtdueño.value === 'si_dueño'){
+        dueño=true;
+       }else{
+        dueño=false;
+       }
+         var newUser ={
+          Nombre:name,
+          Apellido:apellido,
+          Edad:edad,
+          Dueño:dueño   
+        } 
+
+        //console.log(dueño);
+        firebase.database().ref('Users').child(uid).set(newUser);
+        setTimeout(function() {
+        window.location.href="http://localhost:3000/images/profile.html"
+        }, 1000);
+
+      });
+    
+     </script>
+</html>
