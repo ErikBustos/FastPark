@@ -108,7 +108,7 @@ button:hover, a:hover {
                     <a href="#"><i class="fa fa-twitter"></i></a>
                     <a href="#"><i class="fa fa-linkedin"></i></a>
                     <a href="#"><i class="fa fa-facebook"></i></a>
-                    <p><button>Buscar Estacionamiento</button></p>
+                    <p><button id="btnPark">Buscar Estacionamiento</button></p>
                     <p><button id="btnCarro">Agregar Carro</button></p>
 
 
@@ -164,6 +164,7 @@ button:hover, a:hover {
          //Btns
          var btnLogout=document.getElementById('btnLogout');
          var btnCarro=document.getElementById('btnCarro');
+         var btnPark=document.getElementById('btnPark');
          var btnSubmitEstacionamiento=document.getElementById('btnSubmitEstacionamiento');
          
          btnLogout.addEventListener('click', e=>{
@@ -172,6 +173,10 @@ button:hover, a:hover {
 
            btnCarro.addEventListener('click', e=>{
             window.location.href="http://localhost:3000/images/nuevoAuto.html";
+         });
+
+         btnPark.addEventListener('click', e =>{
+          window.location.href="http://localhost:3000/park";
          });
 
          //txt

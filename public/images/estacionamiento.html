@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>Estacionamiento</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+     <!--firebase-->
+     <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase-app.js"></script>
+     <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase-auth.js"></script>
+     <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase-database.js"></script>
+     <!--Modal-->
+    <!--Modal-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+    <style>
+        button {
+        border: none;
+        outline: 0;
+        display: inline-block;
+        padding: 8px;
+        color: white;
+        background-color: #000;
+        text-align: center;
+        cursor: pointer;
+        width: 40;
+        font-size: 18px;
+        }
+    
+                .card {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        max-width: 300px;
+        margin: auto;
+        text-align: center;
+        }
+    
+        </style>
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="#">FastPark</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+          
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                  <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#"  id="btnLogout">Log out</a>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Dropdown
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Log out</a>
+                  </div>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link disabled" href="#">Disabled</a>
+                </li>
+              </ul>
+              <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+              </form>
+            </div>
+          </nav>
+
+        <h1>Estacionamiento <span class="badge badge-secondary">FastPark</span></h1>
+        
+        <form>
+                <div class="form-group">
+                        <label for="cajones">Cajon</label>
+                        <select class="form-control" id="cajones">
+                          <option selected = "selected" value="0">1</option>
+                          <option value="1">2</option>
+                          <option value="2">3</option>
+                          <option value="3">4</option>
+                          <option value="4">5</option>
+                          <option value="5">6</option>
+                        </select>
+                      </div>
+                <div class="form-group">
+                  <label for="horas">Horas</label>
+                  <select class="form-control" id="horas">
+                    <option selected = "selected" value="1">1:00 hora</option>
+                    <option value="2">2:00 horas</option>
+                    <option value="3">3:00 horas</option>
+                    <option value="4">4:00 horas</option>
+                    <option value="5">5:00 horas</option>
+                    <option value="10">más de 6:00 horas</option>
+                  </select>
+                </div>
+                <button type="button" class="btn btn-primary" id = "btnCalcular">   Calcular   </button>
+              </form>
+              <h4>Precio <span class="badge badge-secondary" id = "price">$0.00</span></h4>
+              
+              <!-- Button trigger modal -->
+              
+              <button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#exampleModal" id="btnPrev">   Pagar   </button>
+
+
+
+                
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Pago Estacionamiento</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                          ¿Está seguro que desea pagar?
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btn-primary" id = "btnPagar" >Pagar</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              
+              <script src="https://code.jquery.com/jquery-1.6.4.min.js"></script>
+            
+          <script>
+            //FIREBASE--------------
+             var uid;
+            //user unique id from firebase
+            var config = {
+             apiKey: "AIzaSyAVaten_qJLQb3YyQC_k-CW_rrTX8Bya6I",
+             authDomain: "fastpark-cd1a8.firebaseapp.com",
+             databaseURL: "https://fastpark-cd1a8.firebaseio.com",
+             projectId: "fastpark-cd1a8",
+             storageBucket: "fastpark-cd1a8.appspot.com",
+             messagingSenderId: "86398450595"
+             };
+             firebase.initializeApp(config); 
+
+             //realtime listener
+             firebase.auth().onAuthStateChanged(firebaseUser =>{
+                 if(firebaseUser){
+                  uid=firebaseUser.uid;
+                }
+                 else{        
+                    console.log('not logged in');
+                   window.location.href="http://localhost:3000";         
+                 }
+             });
+            //FIREBASE - END --------------------------
+
+
+            var btnC = document.getElementById("btnCalcular");
+            var btnP = document.getElementById("btnPagar");
+            var btnPrev = document.getElementById("btnPrev");
+
+            btnC.addEventListener('click', e=>{
+              var box = $("#cajones").find("option:selected").text();
+              var hours = $("#horas").find("option:selected").val();
+
+              var price = hours*7;
+              $("#price").text("$"+price+".00");
+              //window.location.href="http://localhost:3000";       
+           });
+           function wait(ms)
+          {
+            var d = new Date();
+            var d2 = null;
+            do { d2 = new Date(); }
+            while(d2-d < ms);
+          }
+           btnP.addEventListener('click', e=>{
+            var box = $("#cajones").find("option:selected").text();
+            var horas = $("#horas").find("option:selected").val();
+            
+            var price = horas*7;
+            
+
+            var Digital=new Date();
+            var hours=Digital.getHours();
+            var minutes=Digital.getMinutes();
+            var seconds=Digital.getSeconds();
+            var horaActual = hours+":"+minutes+":"+seconds;
+            var finalHours = parseInt(hours)+parseInt(horas);
+            if(finalHours >=24){
+              finalHours = finalHours-24;
+            }
+            
+            var horaFinal = finalHours+":"+minutes+":"+seconds;
+
+            var newReserva ={
+              Espacio:box,
+              HoraLlegada:horaActual,
+              HoraSalida:horaFinal,
+              Precio:price
+            } 
+            //window.location.href="http://localhost:3000"; 
+            firebase.database().ref('Users').child(uid).child('Reserva').child(box).set(newReserva);
+            firebase.database().ref('Reservas').child(box).set(newReserva,function(error){
+              if(error){
+                console.log("ERROR");
+              }else{
+                window.location.href="http://localhost:3000/images/profile.html"; 
+              }
+            });
+            
+           });
+           
+           btnPrev.addEventListener('click', e =>{
+            var horas = $("#horas").find("option:selected").val();
+            var price = horas*7;
+              $("#price").text("$"+price+".00");
+           });
+          </script>
+    </body>
+</html>

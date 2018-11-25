@@ -39,14 +39,14 @@ ref.once("value", function(snapshot) {
   console.log(snapshot.val());
 });
 
-app.get('/', function(req, res) {
+app.get('/', function(req, res,next) {
   console.log('Hola mundo');
   res.render("hola");
   res.send('Hola Mundo!');
 });
 
 //Post para el login
-app.post('/signIn', function(req,res){
+app.post('/signIn', function(req,res,next){
   firebase.auth().signInWithEmailAndPassword(req.body.email, req.body.password).catch(function(error) {
     var errorCode = error.code;
     var errorMessage = error.message;
@@ -62,7 +62,7 @@ app.post('/signIn', function(req,res){
 });
 
 //Post para el signup
-app.post('/signUp', function(req,res){
+app.post('/signUp', function(req,res,next){
     //res.send('home');
     console.log(req.body.email + " "+ req.body.contraseña);
     
@@ -80,7 +80,7 @@ app.post('/signUp', function(req,res){
     
 });
 
-app.post('/datosUser',function(req,res){
+app.post('/datosUser',function(req,res,next){
   
   
   var dueño;
@@ -104,7 +104,7 @@ app.post('/datosUser',function(req,res){
 });
 
 
-app.get('/profile',function(req,res){
+app.get('/profile',function(req,res,next){
 
 
     var list;
@@ -124,6 +124,16 @@ app.get('/profile',function(req,res){
   //console.log(req.body.firstname);
   //res.send('login');
   //db.ref("Usuarios").push(newUser)
+});
+
+app.get('/park',function (req,res,next){
+  console.log("GET to PARK");
+  return res.redirect('../images/estacionamiento.html');
+});
+
+app.get('/park/:id',(req,res,next)=>{
+  console.log("Cajon numero: "+ req.params.id);
+  return res.redirect('../images/pay.html');
 });
 
 
