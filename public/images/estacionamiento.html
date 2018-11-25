@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>Estacionamiento</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+     <!--firebase-->
+     <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase-app.js"></script>
+     <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase-auth.js"></script>
+     <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase-database.js"></script>
+    <style>
+        button {
+        border: none;
+        outline: 0;
+        display: inline-block;
+        padding: 8px;
+        color: white;
+        background-color: #000;
+        text-align: center;
+        cursor: pointer;
+        width: 40;
+        font-size: 18px;
+        }
+    
+                .card {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        max-width: 300px;
+        margin: auto;
+        text-align: center;
+        }
+    
+        </style>
+    </head>
+    <body>
+        <h1>Estacionamiento <span class="badge badge-secondary">FastPark</span></h1>
+        
+        <form>
+                <div class="form-group">
+                        <label for="cajones">Cajon</label>
+                        <select class="form-control" id="cajones">
+                          <option selected = "selected" value="0">1</option>
+                          <option value="1">2</option>
+                          <option value="2">3</option>
+                          <option value="3">4</option>
+                          <option value="4">5</option>
+                          <option value="5">6</option>
+                        </select>
+                      </div>
+                <div class="form-group">
+                  <label for="horas">Horas</label>
+                  <select class="form-control" id="horas">
+                    <option selected = "selected" value="1">1:00 hora</option>
+                    <option value="2">2:00 horas</option>
+                    <option value="3">3:00 horas</option>
+                    <option value="4">4:00 horas</option>
+                    <option value="5">5:00 horas</option>
+                    <option value="10">más de 6:00 horas</option>
+                  </select>
+                </div>
+                <button type="button" class="btn btn-primary" id = "btnCalcular">Calcular</button>
+              </form>
+              <h4>Precio <span class="badge badge-secondary" id = "price">$0.00</span></h4>
+              
+              <script src="https://code.jquery.com/jquery-1.6.4.min.js"></script>
+            
+          <script>
+            //FIREBASE--------------
+             var uid;
+            //user unique id from firebase
+            var config = {
+             apiKey: "AIzaSyAVaten_qJLQb3YyQC_k-CW_rrTX8Bya6I",
+             authDomain: "fastpark-cd1a8.firebaseapp.com",
+             databaseURL: "https://fastpark-cd1a8.firebaseio.com",
+             projectId: "fastpark-cd1a8",
+             storageBucket: "fastpark-cd1a8.appspot.com",
+             messagingSenderId: "86398450595"
+             };
+             firebase.initializeApp(config); 
+
+             //realtime listener
+             
+            //FIREBASE - END --------------------------
+
+
+            var btnC = document.getElementById("btnCalcular");
+
+            btnC.addEventListener('click', e=>{
+              var box = $("#cajones").find("option:selected").text();
+              var hours = $("#horas").find("option:selected").val();
+              var cost = firebase.database().ref('Estacionamientos').child('Galerias').child('Precio').get();
+              var price = hours*cost;
+              var decimal = price - Math.floor(price);
+              $("#price").text("$"+price+".00");
+              //window.location.href="http://localhost:3000";       
+           });
+            
+          </script>
+    </body>
+</html>
